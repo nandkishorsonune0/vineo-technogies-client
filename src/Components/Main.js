@@ -6,8 +6,7 @@ function Main() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/data")
+    axios.get("http://localhost:5000/data")
       .then((response) => {
         setData(response.data);
         setLoading(false);
