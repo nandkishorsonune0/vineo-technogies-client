@@ -1,0 +1,9 @@
+body{
+    display: flex;
+    margin-top:200px;
+    align-items: center;
+    justify-content: center;
+}
+th, td{
+    border: 1px solid black;
+}

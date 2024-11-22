@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Main.css'
 
 function Main() {
   const [data, setData] = useState([]);
@@ -22,7 +23,7 @@ function Main() {
 
   return (
     <>
-      <table>
+      <table style={{border:"1px solid black"}}>
         <thead>
           <tr>
             <th>Name</th>
