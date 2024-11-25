@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import './Main.css'
+import Button from './Button';
+import { NameContext } from './Context';
 
-function Main() {
+function Main(props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const {name}= useContext(NameContext)
   useEffect(() => {
     axios.get("http://localhost:5000/data")
       .then((response) => {
@@ -43,6 +45,8 @@ function Main() {
           ))}
         </tbody>
       </table>
+      <h1>{props.name}</h1>
+      <Button name="Next Button"/>
     </>
   );
 }
