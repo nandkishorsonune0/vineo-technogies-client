@@ -1,9 +1,10 @@
-import React from 'react'
-
-function Button(props) {
-    console.log("Button")
+import React, { useContext } from 'react'
+import { NameContext } from './Context'
+function Button() {
+  const {name}=useContext(NameContext)
+    console.log("Button rendered")
   return (
-    <button onClick={()=>{console.log(props.name)}}> Click me</button>
+    <button onClick={()=>{console.log({name})}}> Click me</button>
   )
 }
 

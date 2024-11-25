@@ -1,10 +1,8 @@
-// Context.js
-import React, { createContext, useState } from 'react';
 
-// Create a context
+import React,{createContext, useState} from 'react';
+
 export const NameContext = createContext();
 
-// Create a provider component
 export const NameProvider = ({ children }) => {
   const [name, setName] = useState("Nandkishor");
 
