@@ -1,13 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState, useMemo } from 'react';
 import axios from 'axios';
-import './Main.css'
+import './Main.css';
 import Button from './Button';
+import { NameContext } from './Context';
 
-
-function Main(props) {
+function Main() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
- 
+  
+  const { name, setName } = useContext(NameContext);
+
   useEffect(() => {
     axios.get("http://localhost:5000/data")
       .then((response) => {
@@ -19,13 +21,29 @@ function Main(props) {
       });
   }, []);
 
+  const NameChange = useCallback((e) => {
+    setName(e.target.value);
+  }, [setName]);
+
+  
+  const tableRows = useMemo(() => {
+    return data.map((item) => (
+      <tr key={item.roll_no}>
+        <td>{item.name}</td>
+        <td>{item.roll_no}</td>
+        <td>{item.marks}</td>
+        <td>{item.age}</td>
+      </tr>
+    ));
+  }, [data]); 
+
   if (loading) {
     return <p>Loading data...</p>;
   }
 
   return (
     <>
-      <table style={{border:"1px solid black"}}>
+      <table style={{ border: "1px solid black" }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -35,18 +53,11 @@ function Main(props) {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.roll_no}>
-              <td>{item.name}</td>
-              <td>{item.roll_no}</td>
-              <td>{item.marks}</td>
-              <td>{item.age}</td>
-            </tr>
-          ))}
+          {tableRows}  
         </tbody>
       </table>
-      <h1>{props.name}</h1>
-      <Button name="Next Button"/>
+      <h1>{name}</h1>
+      <Button />  
     </>
   );
 }
